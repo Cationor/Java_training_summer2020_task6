@@ -1,7 +1,7 @@
-package com.epamcourse.homework6.controller.command.client;
+package com.epamcourse.homework6.controller.command.user;
 
 import com.epamcourse.homework6.controller.command.ActionCommand;
-import com.epamcourse.homework6.controller.command.impl.*;
+import com.epamcourse.homework6.controller.command.imp.*;
 
 public enum CommandType {
     ADD_BOOK(new AddBookCommand()),

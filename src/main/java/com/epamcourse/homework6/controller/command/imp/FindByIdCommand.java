@@ -1,7 +1,6 @@
-package com.epamcourse.homework6.controller.command.impl;
+package com.epamcourse.homework6.controller.command.imp;
 
 import com.epamcourse.homework6.controller.command.param.RequestParam;
-import com.epamcourse.homework6.controller.command.param.ResponseParam;
 import com.epamcourse.homework6.model.entity.Book;
 import com.epamcourse.homework6.model.exception.ServiceException;
 import com.epamcourse.homework6.model.service.BookService;
@@ -9,14 +8,14 @@ import com.epamcourse.homework6.controller.command.ActionCommand;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Stream;
+import com.epamcourse.homework6.controller.command.param.ResponseParam;
 
-public class FindByNameCommand implements ActionCommand {
+public class FindByIdCommand implements ActionCommand {
     @Override
     public Map<String, Object> execute(Map<String, Object> params) {
         Map<String, Object> response = new HashMap<>();
         try {
-            Stream<Book> book = new BookService().findByName((String) params.get(RequestParam.BOOK_NAME));
+            Book book = new BookService().findById((int) params.get(RequestParam.ID));
             response.put(ResponseParam.RESPONSE_STATUS, ResponseParam.RESPONSE_STATUS_SUCCESS);
             response.put(ResponseParam.RESPONSE_RESULT, book);
         } catch (ServiceException e) {

@@ -35,17 +35,17 @@ public class BookListDaoTest {
         when(book2.getBookId()).thenReturn(2);
         when(book3.getBookId()).thenReturn(3);
 
-        when(book1.getName()).thenReturn("War and peace");
-        when(book2.getName()).thenReturn("Bible");
-        when(book3.getName()).thenReturn("Mystery method");
+        when(book1.getName()).thenReturn("Don Quixote");
+        when(book2.getName()).thenReturn("Moby Dick");
+        when(book3.getName()).thenReturn("Hamlet");
 
-        when(book1.getAuthor()).thenReturn(new String[]{"Tolstoi"});
-        when(book2.getAuthor()).thenReturn(new String[]{"God", "Holy spirit"});
-        when(book3.getAuthor()).thenReturn(new String[]{"Mystery"});
+        when(book1.getAuthor()).thenReturn(new String[]{"Miguel de Cervantes"});
+        when(book2.getAuthor()).thenReturn(new String[]{"Herman Melville"});
+        when(book3.getAuthor()).thenReturn(new String[]{"William Shakespeare"});
 
-        when(book1.getNumberOfPage()).thenReturn(254);
-        when(book2.getNumberOfPage()).thenReturn(754);
-        when(book3.getNumberOfPage()).thenReturn(123);
+        when(book1.getNumberOfPage()).thenReturn(534);
+        when(book2.getNumberOfPage()).thenReturn(644);
+        when(book3.getNumberOfPage()).thenReturn(632);
 
         when(stock.getContext()).thenReturn(bookList);
 
@@ -70,7 +70,7 @@ public class BookListDaoTest {
     @Test
     public void testSearchByName() {
         Object[] expected = new Object[]{book2};
-        Object[] actual = bookListDao.findByName("Bible").toArray();
+        Object[] actual = bookListDao.findByName("Moby Dick").toArray();
 
         assertEquals(actual, expected);
     }
@@ -78,7 +78,7 @@ public class BookListDaoTest {
     @Test
     public void testSearchByAuthor() {
         Object[] expected = new Object[]{book2};
-        Object[] actual = bookListDao.findByAuthor(new String[]{"God", "Holy spirit"}).toArray();
+        Object[] actual = bookListDao.findByAuthor(new String[]{"Herman Melville"}).toArray();
 
         assertEquals(actual, expected);
     }

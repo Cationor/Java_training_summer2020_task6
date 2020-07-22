@@ -18,20 +18,20 @@ public class RequestProcessorTest {
 
     @BeforeClass
     public void init() {
-        bookListDao.addBook(new Book(1, "JAVA_Methods_Prog", 400, "Blinov", "Romanchic"));
-        bookListDao.addBook(new Book(2, "War and peace", 600, "Tolstoi"));
-        bookListDao.addBook(new Book(3, "Bible", 349, "Mystery"));
-        bookListDao.addBook(new Book(4, "Mystery method", 412, "Mystery"));
+        bookListDao.addBook(new Book(1, "Frankenstein", 759, "Mary Shelley"));
+        bookListDao.addBook(new Book(2, "Don Quixote", 240, "Miguel de Cervantes"));
+        bookListDao.addBook(new Book(3, "Moby Dick", 769, "Herman Melville"));
+        bookListDao.addBook(new Book(4, "Hamlet", 122, "William Shakespeare"));
     }
 
     @Test
     public void testDoRequestAddBook() {
         Map<String, Object> params = new HashMap<>();
-        params.put("name", "War");
+        params.put("name", "Dracula");
         params.put("numberOfPage", 9);
-        params.put("author", new String[]{"Ivanov", "Sodorov"});
+        params.put("author", new String[]{"Bram Stoker"});
         requestProcessor.doRequest("add_Book", params);
-        Book expected = new Book(5, "War", 9, "Ivanov", "Sodorov");
+        Book expected = new Book(5, "Dracula", 9, "Bram Stoker");
         Book actual = null;
         try {
             actual = bookListDao.findById(5);
@@ -45,7 +45,7 @@ public class RequestProcessorTest {
     public void testDoRequestFindById() {
         Map<String, Object> params = new HashMap<>();
         params.put("id", 5);
-        Book expected = new Book(5, "War", 9, "Ivanov", "Sodorov");
+        Book expected = new Book(5, "Dracula", 9, "Bram Stoker");
         Book actual = (Book) requestProcessor.doRequest("find_by_id", params).get("result");
         assertEquals(actual, expected);
     }
@@ -53,9 +53,9 @@ public class RequestProcessorTest {
     @Test(dependsOnMethods = "testDoRequestAddBook")
     public void testDoRequestFindByAuthor() {
         Map<String, Object> params = new HashMap<>();
-        params.put("author", new String[]{"Mystery"});
-        Object[] expected = new Object[]{new Book(3, "Bible", 349, "Mystery"),
-                new Book(4, "Mystery method", 412, "Mystery")};
+        params.put("author", new String[]{"William Shakespeare"});
+        Object[] expected = new Object[]{new Book(3, "Moby Dick", 769, "Herman Melville"),
+                new Book(4, "Hamlet", 122, "William Shakespeare")};
         Object[] actual = ((Stream<Book>) requestProcessor.doRequest("FIND_BY_AUTHOR", params)
                 .get("result")).toArray();
         assertEquals(actual, expected);
@@ -64,10 +64,10 @@ public class RequestProcessorTest {
     @Test(dependsOnMethods = "testDoRequestAddBook")
     public void testDoRequestSortByName() {
         Object[] expected = new Object[]{new Book(3, "Bible", 349, "Mystery"),
-                new Book(1, "JAVA_Methods_Prog", 400, "Blinov", "Romanchic"),
-                new Book(4, "Mystery method", 412, "Mystery"),
-                new Book(5, "War", 9, "Ivanov", "Sodorov"),
-                new Book(2, "War and peace", 600, "Tolstoi")};
+                new Book(1, "Frankenstein", 400, "Mary Shelley"),
+                new Book(4, "Hamlet", 412, "William Shakespeare"),
+                new Book(5, "Dracula", 9, "Bram Stoker"),
+                new Book(2, "Don Quixote", 600, "Miguel de Cervantes")};
         Object[] actual = ((Stream<Book>) requestProcessor.doRequest("sort_BY_name", new HashMap<>())
                 .get("result")).toArray();
         assertEquals(actual, expected);
@@ -78,7 +78,7 @@ public class RequestProcessorTest {
     public void testDoRequestRemove() throws DaoException {
         Map<String, Object> params = new HashMap<>();
         params.put("id", 5);
-        params.put("name", "War");
+        params.put("name", "Moby");
         params.put("numberOfPage", 9);
         params.put("author", new String[]{"Ivanov", "Sodorov"});
         requestProcessor.doRequest("remove_Book", params);

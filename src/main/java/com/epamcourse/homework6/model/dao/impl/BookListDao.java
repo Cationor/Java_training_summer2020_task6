@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.stream.Stream;
 
 public class BookListDao implements BookStorageDao {
-    private Stock stock = Stock.getInstance(); // field is necessary for mock test
+    private Stock stock = Stock.getInstance();
 
     @Override
     public void addBook(Book book) {

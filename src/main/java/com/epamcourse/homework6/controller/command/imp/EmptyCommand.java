@@ -1,4 +1,4 @@
-package com.epamcourse.homework6.controller.command.impl;
+package com.epamcourse.homework6.controller.command.imp;
 
 import com.epamcourse.homework6.controller.command.param.ResponseParam;
 import com.epamcourse.homework6.controller.command.ActionCommand;
